@@ -24,7 +24,6 @@ st.markdown("""
 .hero {
     text-align: center;
     padding: 60px 20px 40px;
-    position: relative;
 }
 
 .hero-title {
@@ -41,7 +40,6 @@ st.markdown("""
 }
 
 .hero-sub {
-    font-family: 'Rajdhani', sans-serif;
     color: #4a5568;
     font-size: 1.1rem;
     letter-spacing: 3px;
@@ -61,7 +59,6 @@ st.markdown("""
     border-radius: 16px;
     padding: 32px;
     margin-bottom: 24px;
-    backdrop-filter: blur(10px);
 }
 
 .section-label {
@@ -83,43 +80,61 @@ st.markdown("""
     background: linear-gradient(90deg, rgba(0,255,163,0.3), transparent);
 }
 
-/* Streamlit overrides */
+/* INPUT TEXT WHITE */
 .stTextInput > div > div > input {
-    background: rgba(0, 255, 163, 0.03) !important;
-    border: 1px solid rgba(0, 255, 163, 0.2) !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 255, 163, 0.25) !important;
     border-radius: 10px !important;
-    color: #e2e8f0 !important;
+    color: #000000 !important;
     font-family: 'Rajdhani', sans-serif !important;
-    font-size: 1rem !important;
+    font-size: 1.05rem !important;
     padding: 12px 16px !important;
+}
+
+.stTextInput > div > div > input::placeholder {
+    color: #555 !important;
 }
 
 .stTextInput > div > div > input:focus {
     border-color: #00ffa3 !important;
     box-shadow: 0 0 20px rgba(0, 255, 163, 0.1) !important;
+    color: #000000 !important;
 }
 
+/* SELECTBOX WHITE TEXT */
 .stSelectbox > div > div {
-    background: rgba(0, 255, 163, 0.03) !important;
-    border: 1px solid rgba(0, 255, 163, 0.2) !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 255, 163, 0.25) !important;
     border-radius: 10px !important;
-    color: #e2e8f0 !important;
+    color: #000000 !important;
 }
 
+.stSelectbox > div > div > div {
+    color: #000000 !important;
+}
+
+/* MULTISELECT WHITE TEXT */
 .stMultiSelect > div > div {
-    background: rgba(0, 255, 163, 0.03) !important;
-    border: 1px solid rgba(0, 255, 163, 0.2) !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 255, 163, 0.25) !important;
     border-radius: 10px !important;
+    color: #000000 !important;
 }
 
+.stMultiSelect span {
+    color: #000000 !important;
+}
+
+/* LABELS */
 label, .stSelectbox label, .stTextInput label, .stMultiSelect label {
-    color: #718096 !important;
+    color: #00ffa3 !important;
     font-family: 'Rajdhani', sans-serif !important;
     font-size: 0.85rem !important;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
 }
 
+/* BUTTON */
 .stButton > button {
     width: 100%;
     background: linear-gradient(135deg, #00ffa3, #00a3ff) !important;
@@ -132,8 +147,6 @@ label, .stSelectbox label, .stTextInput label, .stMultiSelect label {
     font-weight: 700 !important;
     letter-spacing: 3px !important;
     text-transform: uppercase !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
     margin-top: 10px !important;
 }
 
@@ -142,6 +155,7 @@ label, .stSelectbox label, .stTextInput label, .stMultiSelect label {
     box-shadow: 0 10px 40px rgba(0, 255, 163, 0.3) !important;
 }
 
+/* RESULT CARDS */
 .result-card {
     background: rgba(0, 255, 163, 0.03);
     border: 1px solid rgba(0, 255, 163, 0.1);
@@ -149,10 +163,11 @@ label, .stSelectbox label, .stTextInput label, .stMultiSelect label {
     border-radius: 12px;
     padding: 24px;
     margin: 16px 0;
-    color: #cbd5e0;
+    color: #e2e8f0;
     font-family: 'Rajdhani', sans-serif;
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.8;
+    white-space: pre-wrap;
 }
 
 .platform-badge {
@@ -177,27 +192,14 @@ label, .stSelectbox label, .stTextInput label, .stMultiSelect label {
     margin-top: 12px;
     color: #a0aec0;
     font-size: 0.95rem;
-}
-
-.stSuccess {
-    background: rgba(0, 255, 163, 0.05) !important;
-    border: 1px solid rgba(0, 255, 163, 0.3) !important;
-    border-radius: 10px !important;
-    color: #00ffa3 !important;
-}
-
-.stSpinner > div {
-    border-top-color: #00ffa3 !important;
+    line-height: 1.7;
+    white-space: pre-wrap;
 }
 
 h2, h3 {
     font-family: 'Orbitron', monospace !important;
     color: #e2e8f0 !important;
     letter-spacing: 2px !important;
-}
-
-.stDivider {
-    border-color: rgba(0, 255, 163, 0.1) !important;
 }
 </style>
 
@@ -208,24 +210,24 @@ h2, h3 {
 <div class="neon-line"></div>
 """, unsafe_allow_html=True)
 
-# Input Section
 st.markdown('<div class="card">', unsafe_allow_html=True)
 st.markdown('<div class="section-label">▸ Brand Configuration</div>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 with col1:
-    brand = st.text_input("Brand Name", "AI Academy", label_visibility="visible")
-    audience = st.text_input("Target Audience", "Students and Professionals")
+    brand = st.text_input("Brand Name", placeholder="e.g. Cyber Security Academy")
+    audience = st.text_input("Target Audience", placeholder="e.g. Students and Professionals")
 with col2:
     goal = st.selectbox("Campaign Goal", ["Brand Awareness", "Generate Leads", "Sales", "Engagement"])
     platforms = st.multiselect("Target Platforms", ["Instagram", "LinkedIn", "Twitter", "Facebook", "TikTok"], default=["Instagram", "LinkedIn"])
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Generate Button
 if st.button("⚡ GENERATE CONTENT"):
     if not platforms:
         st.error("Kam az kam ek platform select karo!")
+    elif not brand:
+        st.error("Brand name zaroor likho!")
     else:
         with st.spinner("AI Agents kaam kar rahe hain..."):
             result = run_workflow(brand, goal, audience, platforms)
@@ -233,19 +235,16 @@ if st.button("⚡ GENERATE CONTENT"):
         st.success("✅ Content Generation Complete!")
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Strategy
         st.markdown('<div class="section-label">▸ Strategy Output</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="result-card">{result["strategy"]}</div>', unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Research
         st.markdown('<div class="section-label">▸ Market Research</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="result-card">{result["research"]}</div>', unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Posts
         st.markdown('<div class="section-label">▸ Generated Posts</div>', unsafe_allow_html=True)
         for post in result["posts"]:
             st.markdown(f'<div class="platform-badge">📱 {post["platform"]}</div>', unsafe_allow_html=True)
